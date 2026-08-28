@@ -1,16 +1,36 @@
-# React + Vite
+# Nexus UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A next-generation, high-performance UI toolkit built for modern developers, bridging the gap between spatial 3D WebGL rendering and rock-solid design system primitives.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+* **ARIA-First Form Primitives**: Fully accessible MultiSelect components built strictly against the W3C ARIA APG Listbox pattern, featuring robust popover isolation and instant state synchronization.
+* **Spatial Data Structures**: Fluid, accessible drag-and-drop sorting powered by `@dnd-kit`, fully supporting both mouse interactions and keyboard-only navigation.
+* **Immersive 3D WebGL Shaders**: Real-time interactive 3D elements powered by Three.js and custom physical materials, featuring dynamic index-of-refraction, glass transmission, and iridescent visual shaders.
+* **Glassmorphic Design System**: Custom CSS architecture featuring ambient video backgrounds, high-performance backdrop filters, and refined micro-interactions.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Framework**: React, Vite
+* **Styling**: Vanilla CSS (Modular & Custom Properties)
+* **Interactivity & DnD**: `@dnd-kit`
+* **3D Graphics**: Three.js / React Three Fiber
+
+---
+
+## Getting Started Locally
+
+Follow these steps to set up and run the project on your local machine:
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your system.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/upagyaawasthi5-del/nexus.git](https://github.com/upagyaawasthi5-del/nexus.git)
