@@ -1,0 +1,166 @@
+.ms-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 380px;
+  text-align: left;
+  font-family: var(--sans);
+}
+
+.ms-label {
+  font-family: var(--heading);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.ms-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.ms-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  padding: 3px 6px 3px 10px;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.ms-chip-remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 2px 5px;
+  border-radius: 999px;
+  color: var(--accent);
+}
+
+.ms-chip-remove:hover {
+  background: var(--accent-border);
+}
+
+.ms-chip-remove:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ms-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--text-h);
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.ms-trigger:hover {
+  border-color: var(--accent-border);
+}
+
+.ms-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ms-caret {
+  font-size: 12px;
+  color: var(--text);
+}
+
+/*
+ * .ms-listbox is rendered through a React portal into document.body and
+ * positioned via inline styles (position: fixed; top/left/width) computed
+ * from the trigger's bounding rect — see MultiSelect.jsx. This avoids the
+ * listbox being clipped or visually covered by sibling elements/cards that
+ * establish their own stacking context. Do NOT add position/top/left/right
+ * here, they would fight with the inline styles.
+ */
+.ms-listbox {
+  z-index: 9999;
+  margin: 0;
+  padding: 5px;
+  list-style: none;
+  /* Force a fully opaque solid color instead of var(--bg), which may be
+     semi-transparent in this theme and let content behind it show through. */
+  background-color: #14141a;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), var(--shadow);
+  max-height: 260px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.ms-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.ms-option.is-active {
+  background: var(--accent-bg);
+}
+
+.ms-option:focus-visible,
+.ms-option.is-active:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.ms-option.is-disabled {
+  color: var(--text);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ms-checkbox {
+  width: 16px;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ms-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-root * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,437 @@
+/* --- Global & Variables --- */
+:root {
+  --bg-base: #050505;
+  --bg-surface: rgba(12, 12, 16, 0.9);
+  --bg-active: rgba(0, 120, 212, 0.15);
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(0, 120, 212, 0.4);
+  --accent: #0078D4; 
+  --accent-cyan: #00b4d8;
+  --accent-purple: #6366f1;
+  --console-header: rgba(10, 10, 12, 0.95);
+  --glass-blur: blur(24px);
+  --glow-shadow: 0 0 25px rgba(0, 180, 216, 0.15);
+}
+
+body {
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* --- Video Background --- */
+.ambient-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.video-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.7); 
+  z-index: 1;
+}
+
+/* --- Layout Animations --- */
+.animate-on-load {
+  animation: scale-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[class*="animate-stagger-"] {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-stagger-1 { animation-delay: 0.2s; }
+.animate-stagger-2 { animation-delay: 0.3s; }
+.animate-stagger-3 { animation-delay: 0.4s; }
+.animate-stagger-4 { animation-delay: 0.5s; }
+
+/* --- Console Window Wrapper --- */
+.console {
+  background: var(--bg-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 960px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+}
+
+.console-titlebar {
+  background: var(--console-header);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.console-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+
+.console-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #3f3f46;
+}
+.console-dot:nth-child(2) { background-color: #ef4444; }
+.console-dot:nth-child(3) { background-color: #eab308; }
+.console-dot:nth-child(4) { background-color: #22c55e; }
+
+.console-body {
+  padding: 3rem 4rem;
+}
+
+/* --- Split Layout for 3D Integration --- */
+.split-section {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  text-align: left;
+}
+
+.split-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.split-content {
+  flex: 1.2;
+}
+
+.split-3d {
+  flex: 1;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.split-section .ms-demo-grid {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .split-section, .split-section.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .split-3d {
+    width: 100%;
+    height: 350px;
+  }
+}
+
+/* --- Typography & Sections --- */
+.hero {
+  margin-bottom: 4rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 0 0 1.25rem 0;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 50%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shine 4s linear infinite;
+}
+
+.hero-sub {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-section {
+  margin-bottom: 5rem;
+}
+
+/* --- Interactive Cards --- */
+.ms-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.interactive-card {
+  background: rgba(18, 18, 24, 0.98);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: visible; /* Allows popover lists to render outside the card bounds */
+  z-index: 2;
+}
+
+.interactive-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.interactive-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), var(--glow-shadow);
+  transform: translateY(-4px);
+  background: rgba(24, 24, 32, 1);
+  z-index: 20; /* Elevates hovered card so its contents sit above others */
+}
+
+.interactive-card:hover::before {
+  opacity: 1;
+}
+
+.demo-card-label {
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+}
+
+.demo-card-note {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 1.25rem;
+  line-height: 1.6;
+}
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--accent-cyan);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.ghost-button {
+  margin-top: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.ghost-button:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+}
+
+/* --- Drag to Reorder Characteristics --- */
+.sortable-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sortable-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(20, 20, 25, 0.85);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 500;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+.sortable-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(30, 30, 35, 0.95);
+}
+
+.sortable-item.is-dragging {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 180, 216, 0.2);
+  opacity: 0.98;
+  transform: scale(1.03) !important;
+  z-index: 50;
+}
+
+.sortable-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: 0.75rem;
+  color: #52525b;
+  border-radius: 4px;
+  cursor: grab;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sortable-drag-handle:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.sortable-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* --- Keymap Section --- */
+.keymap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.keymap-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+.keymap-row:last-child {
+  border-bottom: none;
+}
+
+kbd {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  color: #f8fafc;
+  transition: transform 0.1s ease;
+}
+
+.keymap-row:hover kbd {
+  transform: translateY(1px);
+  border-bottom-width: 1px;
+}
+
+.keymap-action {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- Animations --- */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-up {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .console-body {
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  .app-wrapper {
+    padding: 1rem;
+  }
+}
